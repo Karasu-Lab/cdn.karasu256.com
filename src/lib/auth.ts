@@ -1,7 +1,7 @@
 import { createRemoteJWKSet, customFetch, jwtVerify } from 'jose';
 import { z } from 'zod';
-import { logError, logInfo } from '@Hashibutogarasu/utils/server/log';
-import { vercelProtectionBypassHeaders } from '@Hashibutogarasu/utils/server/vercel-bypass';
+import { logError, logInfo } from '@karasu-lab/utils/server/log';
+import { vercelProtectionBypassHeaders } from '@karasu-lab/utils/server/vercel-bypass';
 
 interface GetSessionResponse {
   user?: { id: string } | null;
@@ -56,7 +56,7 @@ function getJwks(env: Env): ReturnType<typeof createRemoteJWKSet> {
  * Verifies the caller's `Authorization: Bearer` JWT against
  * auth.karasu256.com's JWKS — an alternative to {@link requireUid} for
  * callers whose own server can't rely on the `Cookie` header reaching it
- * (see `SessionProvider` in `@Hashibutogarasu/ui`, which mints this JWT as
+ * (see `SessionProvider` in `@karasu-lab/ui`, which mints this JWT as
  * the single source of truth for "who is logged in"). Returns the token's
  * subject (the user id), or null when the header is missing, the token is
  * expired, or signature verification fails.
