@@ -1,0 +1,81 @@
+# Deploy workflow for this repository, modeled on the hub's existing
+# api-auth / api worker workflows. This app depends on workspace packages,
+# so the deploy still builds in the hub repository's tree: this workflow
+# clones the hub (with its submodules) and pins this app's submodule to
+# the commit that triggered the run. It requires the hub's main branch to
+# carry the submodule layout, and this repository to hold the Actions
+# secrets and variables referenced below under the same names.
+#
+# Pushes to main deploy the production environment and sync its secrets
+# (previously a manual `wrangler secret put`). Pushes to any other branch
+# deploy the preview environment as that branch's worker, with the
+# branch's domain assigned as [branch]-[subdomain].[hostdomain] —
+# e.g. branch "feat-x" is served at feat-x-cdn.karasu256.com.
+name: cdn.karasu256.com Deploy
+
+on:
+  push:
+  workflow_dispatch:
+
+concurrency:
+  group: cdn-deploy-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Assemble the workspace from the hub repository
+        run: |
+          git clone --recurse-submodules --branch main https://github.com/Karasu-Lab/karasu256.com.git .
+          git -C apps/cdn.karasu256.com fetch origin "${{ github.sha }}"
+          git -C apps/cdn.karasu256.com checkout --detach "${{ github.sha }}"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy to production
+        if: github.ref_name == 'main'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+        run: pnpm --filter cdn.karasu256.com deploy
+
+      - name: Sync worker secrets
+        if: github.ref_name == 'main'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          UPLOAD_TICKET_SECRET: ${{ secrets.UPLOAD_TICKET_SECRET }}
+          CRON_JOBS_API_KEY: ${{ secrets.CRON_JOBS_API_KEY }}
+          VERCEL_PROTECTION_BYPASS_SECRET: ${{ secrets.VERCEL_PROTECTION_BYPASS_SECRET }}
+        run: |
+          node .github/scripts/worker-secrets-file.mjs apps/cdn.karasu256.com "$RUNNER_TEMP/cdn-secrets.json" UPLOAD_TICKET_SECRET CRON_JOBS_API_KEY VERCEL_PROTECTION_BYPASS_SECRET
+          pnpm --filter cdn.karasu256.com exec wrangler secret bulk "$RUNNER_TEMP/cdn-secrets.json" --env production
+
+      - name: Compute the branch slug
+        if: github.ref_name != 'main'
+        run: echo "BRANCH_SLUG=$(echo '${{ github.ref_name }}' | tr -cs 'a-zA-Z0-9-' '-' | sed 's/^-*//; s/-*$//')" >> "$GITHUB_ENV"
+
+      - name: Deploy the branch worker
+        if: github.ref_name != 'main'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          UPLOAD_TICKET_SECRET: ${{ secrets.PREVIEW_UPLOAD_TICKET_SECRET }}
+          CRON_JOBS_API_KEY: ${{ secrets.PREVIEW_CRON_JOBS_API_KEY }}
+          VERCEL_PROTECTION_BYPASS_SECRET: ${{ secrets.PREVIEW_VERCEL_PROTECTION_BYPASS_SECRET }}
+        run: |
+          node .github/scripts/worker-secrets-file.mjs apps/cdn.karasu256.com "$RUNNER_TEMP/cdn-preview-secrets.json" UPLOAD_TICKET_SECRET CRON_JOBS_API_KEY VERCEL_PROTECTION_BYPASS_SECRET
+          pnpm --filter cdn.karasu256.com deploy:preview -- --secrets-file "$RUNNER_TEMP/cdn-preview-secrets.json" --route "${{ env.BRANCH_SLUG }}-cdn.karasu256.com"
