@@ -2,6 +2,9 @@ name = "cdn-karasu256-com"
 main = "src/index.ts"
 compatibility_date = "2025-06-24"
 
+[env.production]
+name = "cdn-karasu256-com"
+
 [[env.production.routes]]
 pattern = "cdn.karasu256.com"
 custom_domain = true
@@ -19,6 +22,7 @@ id = "dda7387a349f4de3b1698f20e713294d"
 APP_ENV = "production"
 
 [env.dev]
+name = "cdn-karasu256-com"
 routes = []
 
 [[env.dev.r2_buckets]]
@@ -37,6 +41,7 @@ remote = true
 APP_ENV = "local"
 
 [env.local]
+name = "cdn-karasu256-com"
 routes = []
 
 [[env.local.r2_buckets]]
@@ -51,6 +56,9 @@ id = "local-rate-limit-kv"
 APP_ENV = "local"
 UPLOAD_TICKET_SECRET = "local-development-upload-ticket-secret"
 CRON_JOBS_API_KEY = "local-development-cron-jobs-api-key"
+
+[env.preview]
+name = "cdn-karasu256-com"
 
 [[env.preview.routes]]
 pattern = "dev.cdn.karasu256.com"
