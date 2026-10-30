@@ -32,7 +32,7 @@ jobs:
     steps:
       - name: Assemble the workspace from the hub repository
         run: |
-          git clone --recurse-submodules --branch main https://github.com/Karasu-Lab/karasu256.com.git .
+          git clone --recurse-submodules --branch main https://github.com/Karasu-Lab/Karasu-Lab.git .
           git -C apps/cdn.karasu256.com fetch origin "${{ github.sha }}"
           git -C apps/cdn.karasu256.com checkout --detach "${{ github.sha }}"
 
@@ -74,7 +74,7 @@ jobs:
     steps:
       - name: Assemble the workspace from the hub repository
         run: |
-          git clone --recurse-submodules --branch main https://github.com/Karasu-Lab/karasu256.com.git .
+          git clone --recurse-submodules --branch main https://github.com/Karasu-Lab/Karasu-Lab.git .
           git -C apps/cdn.karasu256.com fetch origin "${{ github.sha }}"
           git -C apps/cdn.karasu256.com checkout --detach "${{ github.sha }}"
 

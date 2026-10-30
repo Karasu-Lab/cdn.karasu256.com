@@ -1,6 +1,6 @@
 # cdn.karasu256.com
 
-The CDN worker for Karasu Lab — serves images from R2 and accepts ticketed uploads — running on Cloudflare Workers. Split out of [Karasu-Lab/karasu256.com](https://github.com/Karasu-Lab/karasu256.com).
+The CDN worker for Karasu Lab — serves images from R2 and accepts ticketed uploads — running on Cloudflare Workers. Split out of [Karasu-Lab/Karasu-Lab](https://github.com/Karasu-Lab/Karasu-Lab).
 
 ## Required environment variables
 
