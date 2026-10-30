@@ -82,3 +82,14 @@ APP_ENV = "preview"
 [observability.logs]
 enabled = true
 invocation_logs = false
+
+[previews.vars]
+APP_ENV = "preview"
+
+[[previews.r2_buckets]]
+binding = "CLOUDFLARE_IMAGES"
+bucket_name = "karasu-lab-cdn-dev"
+
+[[previews.kv_namespaces]]
+binding = "CLOUDFLARE_RATE_LIMIT_KV"
+id = "c3fb9b94d2074304986c58049620d0b4"
