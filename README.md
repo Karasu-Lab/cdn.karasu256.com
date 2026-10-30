@@ -4,7 +4,7 @@ The CDN worker for Karasu Lab — serves images from R2 and accepts ticketed upl
 
 ## Required environment variables
 
-The deploy workflow (`.github/workflows/cdn-deploy.yml`) reads the following GitHub Actions secrets and variables. Register them on this repository under exactly these names. Values are never committed to the repository.
+The deploy workflow (`.github/workflows/cdn-deploy.yml`) reads the following GitHub Actions secrets and variables, organized by GitHub Environments. The production job runs in the `production` environment and the preview job in the `preview` environment (a `development` environment also exists); register each name at repository level as the default, and override it inside an environment only where that environment needs a different value — a name an environment does not define falls back to the repository-level entry. Values are never committed to the repository.
 
 ### Deployment
 
@@ -27,4 +27,4 @@ If one of these secrets is unset, the sync falls back to the local default commi
 
 ### Branch previews
 
-Pushes to non-`main` branches create or update a preview deployment of the same single worker (`wrangler preview`), named after the branch. Previews use the `PREVIEW_` variants of the worker secrets: `PREVIEW_UPLOAD_TICKET_SECRET`, `PREVIEW_CRON_JOBS_API_KEY`, `PREVIEW_VERCEL_PROTECTION_BYPASS_SECRET`.
+Pushes to non-`main` branches create or update a preview deployment of the same single worker (`wrangler preview`), named after the branch. Previews resolve the same secret names from the `preview` environment.
