@@ -8,9 +8,10 @@
 #
 # Pushes to main deploy the production environment and sync its secrets
 # (previously a manual `wrangler secret put`). Pushes to any other branch
-# deploy the preview environment as that branch's worker, with the
-# branch's domain assigned as [branch]-[subdomain].[hostdomain] —
-# e.g. branch "feat-x" is served at feat-x-cdn.karasu256.com.
+# create or update a preview deployment of the same single worker
+# (wrangler preview), named after the branch — the mechanism the api-auth
+# and api workers already use, so branches never split into separate
+# workers.
 name: cdn.karasu256.com Deploy
 
 on:
@@ -64,11 +65,7 @@ jobs:
           node .github/scripts/worker-secrets-file.mjs apps/cdn.karasu256.com "$RUNNER_TEMP/cdn-secrets.json" UPLOAD_TICKET_SECRET CRON_JOBS_API_KEY VERCEL_PROTECTION_BYPASS_SECRET
           pnpm --filter cdn.karasu256.com exec wrangler secret bulk "$RUNNER_TEMP/cdn-secrets.json" --env production
 
-      - name: Compute the branch slug
-        if: github.ref_name != 'main'
-        run: echo "BRANCH_SLUG=$(echo '${{ github.ref_name }}' | tr -cs 'a-zA-Z0-9-' '-' | sed 's/^-*//; s/-*$//')" >> "$GITHUB_ENV"
-
-      - name: Deploy the branch worker
+      - name: Create or update the branch preview
         if: github.ref_name != 'main'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -78,4 +75,4 @@ jobs:
           VERCEL_PROTECTION_BYPASS_SECRET: ${{ secrets.PREVIEW_VERCEL_PROTECTION_BYPASS_SECRET }}
         run: |
           node .github/scripts/worker-secrets-file.mjs apps/cdn.karasu256.com "$RUNNER_TEMP/cdn-preview-secrets.json" UPLOAD_TICKET_SECRET CRON_JOBS_API_KEY VERCEL_PROTECTION_BYPASS_SECRET
-          pnpm --filter cdn.karasu256.com deploy:preview -- --secrets-file "$RUNNER_TEMP/cdn-preview-secrets.json" --route "${{ env.BRANCH_SLUG }}-cdn.karasu256.com"
+          pnpm --filter cdn.karasu256.com preview -- --name "${{ github.ref_name }}" --secrets-file "$RUNNER_TEMP/cdn-preview-secrets.json"

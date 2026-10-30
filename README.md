@@ -25,6 +25,6 @@ These are synced to the production worker on every deploy to `main`.
 
 If one of these secrets is unset, the sync falls back to the local default committed in `wrangler.toml`'s `[env.local.vars]`, and skips the entry when it is defined in neither place.
 
-### Branch workers
+### Branch previews
 
-Pushes to non-`main` branches deploy the preview environment as that branch's worker, served at `[branch]-cdn.karasu256.com`. Branch workers use the `PREVIEW_` variants of the worker secrets: `PREVIEW_UPLOAD_TICKET_SECRET`, `PREVIEW_CRON_JOBS_API_KEY`, `PREVIEW_VERCEL_PROTECTION_BYPASS_SECRET`.
+Pushes to non-`main` branches create or update a preview deployment of the same single worker (`wrangler preview`), named after the branch. Previews use the `PREVIEW_` variants of the worker secrets: `PREVIEW_UPLOAD_TICKET_SECRET`, `PREVIEW_CRON_JOBS_API_KEY`, `PREVIEW_VERCEL_PROTECTION_BYPASS_SECRET`.
