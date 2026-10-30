@@ -4,8 +4,7 @@
 interface __BaseEnv_Env {
   CLOUDFLARE_RATE_LIMIT_KV: KVNamespace;
   CLOUDFLARE_IMAGES: R2Bucket;
-  CDN_BASE_URL: 'http://localhost:8788' | 'https://cdn.karasu256.com';
-  AUTH_URL: 'http://localhost:3004' | 'https://auth.karasu256.com';
+  APP_ENV: string;
 }
 declare namespace Cloudflare {
   interface GlobalProps {
@@ -14,8 +13,7 @@ declare namespace Cloudflare {
   interface DevEnv {
     CLOUDFLARE_RATE_LIMIT_KV: KVNamespace;
     CLOUDFLARE_IMAGES: R2Bucket;
-    CDN_BASE_URL: 'http://localhost:8788';
-    AUTH_URL: 'http://localhost:3004';
+    APP_ENV: string;
   }
   interface Env extends __BaseEnv_Env {}
 }

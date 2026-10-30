@@ -16,8 +16,7 @@ binding = "CLOUDFLARE_RATE_LIMIT_KV"
 id = "dda7387a349f4de3b1698f20e713294d"
 
 [env.production.vars]
-CDN_BASE_URL = "https://cdn.karasu256.com"
-AUTH_URL = "https://api-auth.karasu256.com"
+APP_ENV = "production"
 
 [env.dev]
 routes = []
@@ -35,8 +34,7 @@ id = "c3fb9b94d2074304986c58049620d0b4"
 remote = true
 
 [env.dev.vars]
-CDN_BASE_URL = "http://localhost:8788"
-AUTH_URL = "http://localhost:8790"
+APP_ENV = "local"
 
 [env.local]
 routes = []
@@ -50,8 +48,7 @@ binding = "CLOUDFLARE_RATE_LIMIT_KV"
 id = "local-rate-limit-kv"
 
 [env.local.vars]
-CDN_BASE_URL = "http://localhost:8788"
-AUTH_URL = "http://localhost:8790"
+APP_ENV = "local"
 UPLOAD_TICKET_SECRET = "local-development-upload-ticket-secret"
 CRON_JOBS_API_KEY = "local-development-cron-jobs-api-key"
 
@@ -72,8 +69,7 @@ id = "c3fb9b94d2074304986c58049620d0b4"
 remote = true
 
 [env.preview.vars]
-CDN_BASE_URL = "https://dev.cdn.karasu256.com"
-AUTH_URL = "https://dev-api-auth.karasu256.com"
+APP_ENV = "preview"
 
 [observability.logs]
 enabled = true

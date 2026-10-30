@@ -2,6 +2,11 @@ export {};
 
 declare global {
   interface Env {
+    APP_ENV: 'local' | 'preview' | 'production';
+    /** Resolved by src/constants.ts: carries a zod default branched on APP_ENV, so wrangler vars no longer define it. */
+    CDN_BASE_URL: string;
+    /** Resolved by src/constants.ts: carries a zod default branched on APP_ENV, so wrangler vars no longer define it. */
+    AUTH_URL: string;
     /**
      * Symmetric secret this worker uses to sign and verify short-lived
      * upload tickets (see `lib/upload-ticket.ts`). Provision with
