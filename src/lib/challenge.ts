@@ -12,9 +12,9 @@ export async function consumeChallengeToken(buffer: Uint8Array, env: Env): Promi
   if (!extracted) return null;
 
   const key = `challenge:${extracted.token}`;
-  const exists = await env.RATE_LIMIT_KV.get(key);
+  const exists = await env.CLOUDFLARE_RATE_LIMIT_KV.get(key);
   if (!exists) return null;
 
-  await env.RATE_LIMIT_KV.delete(key);
+  await env.CLOUDFLARE_RATE_LIMIT_KV.delete(key);
   return extracted.payload;
 }

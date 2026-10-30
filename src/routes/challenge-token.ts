@@ -4,7 +4,7 @@ import { generateChallengeToken } from '@Hashibutogarasu/challengetoken';
 
 async function issueChallengeToken(env: Env, ttlSeconds = 120): Promise<string> {
   const token = generateChallengeToken();
-  await env.RATE_LIMIT_KV.put(`challenge:${token}`, '1', { expirationTtl: ttlSeconds });
+  await env.CLOUDFLARE_RATE_LIMIT_KV.put(`challenge:${token}`, '1', { expirationTtl: ttlSeconds });
   return token;
 }
 

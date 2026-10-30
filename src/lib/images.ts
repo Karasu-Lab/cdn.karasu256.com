@@ -8,7 +8,7 @@ export async function serveImage(pathname: string, env: Env): Promise<Response> 
     return new Response('Not Found', { status: 404 });
   }
 
-  const object = await env.IMAGES.get(key);
+  const object = await env.CLOUDFLARE_IMAGES.get(key);
   if (!object) {
     return new Response('Not Found', { status: 404 });
   }
@@ -23,11 +23,11 @@ export async function serveImage(pathname: string, env: Env): Promise<Response> 
 }
 
 export async function deleteImage(key: string, env: Env): Promise<void> {
-  await env.IMAGES.delete(key);
+  await env.CLOUDFLARE_IMAGES.delete(key);
 }
 
 export async function putImage(key: string, buffer: ArrayBuffer, contentType: string, env: Env): Promise<void> {
-  await env.IMAGES.put(key, buffer, {
+  await env.CLOUDFLARE_IMAGES.put(key, buffer, {
     httpMetadata: { contentType },
   });
 }

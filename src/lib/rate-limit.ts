@@ -8,9 +8,9 @@
 export async function checkAndIncrementRateLimit(ip: string, env: Env, limit = 500, windowSeconds = 3600, kvTtlSeconds = 3700): Promise<boolean> {
   const hourBucket = Math.floor(Date.now() / (windowSeconds * 1000));
   const key = `ratelimit:anon:${ip}:${hourBucket}`;
-  const current = parseInt((await env.RATE_LIMIT_KV.get(key)) ?? '0', 10);
+  const current = parseInt((await env.CLOUDFLARE_RATE_LIMIT_KV.get(key)) ?? '0', 10);
   if (current >= limit) return false;
 
-  await env.RATE_LIMIT_KV.put(key, String(current + 1), { expirationTtl: kvTtlSeconds });
+  await env.CLOUDFLARE_RATE_LIMIT_KV.put(key, String(current + 1), { expirationTtl: kvTtlSeconds });
   return true;
 }
