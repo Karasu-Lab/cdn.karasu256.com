@@ -1,8 +1,8 @@
-import { extractChallengeToken } from '@Hashibutogarasu/challengetoken';
+import { extractChallengeToken } from '@karasu-lab/challengetoken';
 
 /**
  * Verifies and consumes (single-use) a challenge token embedded in `buffer`
- * by {@link import('@Hashibutogarasu/challengetoken').embedChallengeToken}.
+ * by {@link import('@karasu-lab/challengetoken').embedChallengeToken}.
  * Returns the original payload (header stripped) on success, or null when
  * the header is missing/malformed or the token was never issued (or was
  * already consumed/expired).

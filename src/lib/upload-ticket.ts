@@ -1,6 +1,6 @@
 import { SignJWT, jwtVerify } from 'jose';
 import { z } from 'zod';
-import { logError, logInfo } from '@Hashibutogarasu/utils/server/log';
+import { logError, logInfo } from '@karasu-lab/utils/server/log';
 
 const ticketPayloadSchema = z.object({ uid: z.string(), path: z.string() });
 

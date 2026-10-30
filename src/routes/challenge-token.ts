@@ -1,6 +1,6 @@
 import { Elysia } from 'elysia';
 import { checkAndIncrementRateLimit } from '../lib/rate-limit';
-import { generateChallengeToken } from '@Hashibutogarasu/challengetoken';
+import { generateChallengeToken } from '@karasu-lab/challengetoken';
 
 async function issueChallengeToken(env: Env, ttlSeconds = 120): Promise<string> {
   const token = generateChallengeToken();

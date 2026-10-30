@@ -1,4 +1,4 @@
-import { logInfo } from '@Hashibutogarasu/utils/server/log';
+import { logInfo } from '@karasu-lab/utils/server/log';
 import { requireUid, verifyAccountsJwt } from './auth';
 import { verifyUploadTicket } from './upload-ticket';
 
