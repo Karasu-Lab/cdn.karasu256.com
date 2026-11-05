@@ -21,32 +21,13 @@ id = "dda7387a349f4de3b1698f20e713294d"
 [env.production.vars]
 APP_ENV = "production"
 
-[env.dev]
-name = "cdn-karasu256-com"
-routes = []
-
-[[env.dev.r2_buckets]]
-binding = "CLOUDFLARE_IMAGES"
-bucket_name = "karasu-lab-cdn-dev"
-remote = true
-
-# Created via `wrangler kv namespace create CLOUDFLARE_RATE_LIMIT_KV --env dev`; replace
-# the id below with the value that command prints.
-[[env.dev.kv_namespaces]]
-binding = "CLOUDFLARE_RATE_LIMIT_KV"
-id = "c3fb9b94d2074304986c58049620d0b4"
-remote = true
-
-[env.dev.vars]
-APP_ENV = "local"
-
 [env.local]
 name = "cdn-karasu256-com"
 routes = []
 
 [[env.local.r2_buckets]]
 binding = "CLOUDFLARE_IMAGES"
-bucket_name = "karasu-lab-cdn-local"
+bucket_name = "cdn-local"
 
 [[env.local.kv_namespaces]]
 binding = "CLOUDFLARE_RATE_LIMIT_KV"

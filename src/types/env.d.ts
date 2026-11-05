@@ -11,7 +11,7 @@ declare global {
      * Symmetric secret this worker uses to sign and verify short-lived
      * upload tickets (see `lib/upload-ticket.ts`). Provision with
      * `wrangler secret put UPLOAD_TICKET_SECRET --env production` (and
-     * again with `--env dev`) — not committed anywhere, unlike the plain
+     * again with `--env preview`) — not committed anywhere, unlike the plain
      * `[vars]` in `wrangler.toml`.
      */
     UPLOAD_TICKET_SECRET: string;
@@ -22,7 +22,7 @@ declare global {
      * it can't go through `verifyAccountsJwt`/`requireUid`. Must match the
      * `CRON_JOBS_API_KEY` provisioned on the `cron-jobs` worker. Provision
      * with `wrangler secret put CRON_JOBS_API_KEY --env production` (and
-     * again with `--env dev`).
+     * again with `--env preview`).
      */
     CRON_JOBS_API_KEY: string;
     /**
