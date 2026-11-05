@@ -11,7 +11,7 @@ custom_domain = true
 
 [[env.production.r2_buckets]]
 binding = "CLOUDFLARE_IMAGES"
-bucket_name = "karasu-lab-cdn"
+bucket_name = "cdn"
 
 # Created via `wrangler kv namespace create CLOUDFLARE_RATE_LIMIT_KV`.
 [[env.production.kv_namespaces]]
@@ -47,7 +47,7 @@ custom_domain = true
 
 [[env.preview.r2_buckets]]
 binding = "CLOUDFLARE_IMAGES"
-bucket_name = "karasu-lab-cdn-dev"
+bucket_name = "cdn"
 remote = true
 
 # Created via `wrangler kv namespace create CLOUDFLARE_RATE_LIMIT_KV --env dev`; replace
@@ -69,7 +69,7 @@ APP_ENV = "preview"
 
 [[previews.r2_buckets]]
 binding = "CLOUDFLARE_IMAGES"
-bucket_name = "karasu-lab-cdn-dev"
+bucket_name = "cdn"
 
 [[previews.kv_namespaces]]
 binding = "CLOUDFLARE_RATE_LIMIT_KV"
