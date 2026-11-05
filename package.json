@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "wrangler dev --port 8788 --inspector-port 9230 --env local",
     "dev:local": "wrangler dev --port 8788 --inspector-port 9230 --env local",
-    "dev:preview": "wrangler dev --port 8788 --inspector-port 9230 --env preview",
     "deploy": "wrangler deploy --env production",
     "deploy:preview": "wrangler deploy --env preview",
     "preview": "wrangler preview --env preview",
