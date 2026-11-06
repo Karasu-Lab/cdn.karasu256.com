@@ -2,23 +2,17 @@ name = "cdn-karasu256-com"
 main = "src/index.ts"
 compatibility_date = "2025-06-24"
 
-[env.production]
-name = "cdn-karasu256-com"
+routes = [{ pattern = "cdn.karasu256.com", custom_domain = true }]
 
-[[env.production.routes]]
-pattern = "cdn.karasu256.com"
-custom_domain = true
-
-[[env.production.r2_buckets]]
+[[r2_buckets]]
 binding = "CLOUDFLARE_IMAGES"
 bucket_name = "cdn"
 
-# Created via `wrangler kv namespace create CLOUDFLARE_RATE_LIMIT_KV`.
-[[env.production.kv_namespaces]]
+[[kv_namespaces]]
 binding = "CLOUDFLARE_RATE_LIMIT_KV"
 id = "dda7387a349f4de3b1698f20e713294d"
 
-[env.production.vars]
+[vars]
 APP_ENV = "production"
 
 [env.local]
@@ -50,8 +44,6 @@ binding = "CLOUDFLARE_IMAGES"
 bucket_name = "cdn"
 remote = true
 
-# Created via `wrangler kv namespace create CLOUDFLARE_RATE_LIMIT_KV --env dev`; replace
-# the id below with the value that command prints.
 [[env.preview.kv_namespaces]]
 binding = "CLOUDFLARE_RATE_LIMIT_KV"
 id = "c3fb9b94d2074304986c58049620d0b4"
