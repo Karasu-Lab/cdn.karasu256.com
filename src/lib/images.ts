@@ -1,16 +1,12 @@
-/**
- * Serves a previously uploaded image from R2 by its object key, so that the
- * URL returned from `/upload` is actually loadable (e.g. as an `<img>` src).
- */
 export async function serveImage(pathname: string, env: Env): Promise<Response> {
   const key = pathname.slice(1);
   if (!key) {
-    return new Response('Not Found', { status: 404 });
+    return new Response('Not Found', { status: 404, headers: { 'Access-Control-Allow-Origin': '*' } });
   }
 
   const object = await env.CLOUDFLARE_IMAGES.get(key);
   if (!object) {
-    return new Response('Not Found', { status: 404 });
+    return new Response('Not Found', { status: 404, headers: { 'Access-Control-Allow-Origin': '*' } });
   }
 
   const headers = new Headers();
