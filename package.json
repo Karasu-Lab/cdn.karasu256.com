@@ -1,14 +1,15 @@
 {
   "name": "cdn.karasu256.com",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "wrangler dev --port 8788 --inspector-port 9230 --env local",
     "dev:local": "wrangler dev --port 8788 --inspector-port 9230 --env local",
-    "deploy": "wrangler deploy --env production",
+    "deploy": "wrangler deploy",
     "deploy:preview": "wrangler deploy --env preview",
     "preview": "wrangler preview --env preview",
-    "build": "wrangler deploy --dry-run --outdir dist --env production"
+    "build": "wrangler deploy --dry-run --outdir dist"
   },
   "dependencies": {
     "@karasu-lab/challengetoken": "0.1.0-b34518d",
@@ -19,8 +20,10 @@
     "zod": "^4.5.4"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.62.5",
     "@sinclair/typebox": "^0.34.49",
     "openapi-types": "^12.1.3",
-    "wrangler": "^4.0.0"
+    "vite": "^8.3.0",
+    "wrangler": "^4.147.0"
   }
 }
