@@ -1,6 +1,7 @@
 {
   "name": "cdn.karasu256.com",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "wrangler dev --port 8788 --inspector-port 9230 --env local",
