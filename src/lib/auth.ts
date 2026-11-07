@@ -1,6 +1,6 @@
 import { createRemoteJWKSet, customFetch, jwtVerify } from 'jose';
 import { z } from 'zod';
-import { logError, logInfo } from '@karasu-lab/utils/server/log';
+import { log } from '@karasu-lab/utils/server/log';
 import { vercelProtectionBypassHeaders } from '@karasu-lab/utils/server/vercel-bypass';
 
 interface GetSessionResponse {
@@ -35,7 +35,7 @@ function getJwks(env: Env): ReturnType<typeof createRemoteJWKSet> {
               .text()
               .then((text) => text.slice(0, 500))
               .catch(() => undefined);
-      logInfo('fetch_jwks', {
+      log('fetch_jwks', {
         url,
         status: res.status,
         type: res.type,
@@ -68,10 +68,10 @@ export async function verifyAccountsJwt(request: Request, env: Env): Promise<str
   try {
     const { payload } = await jwtVerify(authHeader.slice(7), getJwks(env));
     const sub = accountsJwtPayloadSchema.parse(payload).sub;
-    logInfo('verify_accounts_jwt', { result: 'success', uid: sub });
+    log('verify_accounts_jwt', { result: 'success', uid: sub });
     return sub;
   } catch (err) {
-    logError('verify_accounts_jwt', { result: 'failure', error: err instanceof Error ? err.message : String(err) });
+    log('verify_accounts_jwt', { result: 'failure', error: err instanceof Error ? err.message : String(err) }, 'error');
     return null;
   }
 }
@@ -111,18 +111,18 @@ export async function requireUid(request: Request, env: Env): Promise<string | n
       headers: { cookie: cookieHeader, ...vercelProtectionBypassHeaders(env.VERCEL_PROTECTION_BYPASS_SECRET) },
     });
     if (!res.ok) {
-      logError('require_uid', { result: 'failure', url, status: res.status });
+      log('require_uid', { result: 'failure', url, status: res.status }, 'error');
       return null;
     }
     const data = (await res.json()) as GetSessionResponse;
     if (!data.user) {
-      logError('require_uid', { result: 'no_session' });
+      log('require_uid', { result: 'no_session' }, 'error');
       return null;
     }
-    logInfo('require_uid', { result: 'success', uid: data.user.id });
+    log('require_uid', { result: 'success', uid: data.user.id });
     return data.user.id;
   } catch (err) {
-    logError('require_uid', { result: 'error', url, error: err instanceof Error ? err.message : String(err) });
+    log('require_uid', { result: 'error', url, error: err instanceof Error ? err.message : String(err) }, 'error');
     return null;
   }
 }
