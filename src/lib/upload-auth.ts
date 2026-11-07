@@ -1,4 +1,4 @@
-import { logInfo } from '@karasu-lab/utils/server/log';
+import { log } from '@karasu-lab/utils/server/log';
 import { requireUid, verifyAccountsJwt } from './auth';
 import { verifyUploadTicket } from './upload-ticket';
 
@@ -28,7 +28,7 @@ export async function resolveUploadAuth(request: Request, path: string | null, e
   if (path) {
     const ticketUid = await verifyUploadTicket(request, path, env);
     if (ticketUid) {
-      logInfo('resolve_upload_auth', { method: 'ticket', result: 'success', uid: ticketUid, path });
+      log('resolve_upload_auth', { method: 'ticket', result: 'success', uid: ticketUid, path });
       return { uid: ticketUid, method: 'ticket' };
     }
   }
@@ -36,7 +36,7 @@ export async function resolveUploadAuth(request: Request, path: string | null, e
   if (authHeader) {
     const jwtUid = await verifyAccountsJwt(request, env);
     if (jwtUid) {
-      logInfo('resolve_upload_auth', { method: 'jwt', result: 'success', uid: jwtUid });
+      log('resolve_upload_auth', { method: 'jwt', result: 'success', uid: jwtUid });
       return { uid: jwtUid, method: 'jwt' };
     }
   }
@@ -44,12 +44,12 @@ export async function resolveUploadAuth(request: Request, path: string | null, e
   if (hasCookie) {
     const cookieUid = await requireUid(request, env);
     if (cookieUid) {
-      logInfo('resolve_upload_auth', { method: 'cookie', result: 'success', uid: cookieUid });
+      log('resolve_upload_auth', { method: 'cookie', result: 'success', uid: cookieUid });
       return { uid: cookieUid, method: 'cookie' };
     }
   }
 
-  logInfo('resolve_upload_auth', {
+  log('resolve_upload_auth', {
     method: 'none',
     result: 'anonymous',
     path,

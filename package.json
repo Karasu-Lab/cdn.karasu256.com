@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@karasu-lab/challengetoken": "0.1.0-b34518d",
-    "@karasu-lab/utils": "0.1.0-be51f04",
+    "@karasu-lab/utils": "0.1.0-c59c9ae",
     "@elysiajs/cors": "^1.4.2",
     "elysia": "^1.4.29",
     "jose": "^6.2.3",

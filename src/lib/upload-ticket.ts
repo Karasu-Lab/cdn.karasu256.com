@@ -1,6 +1,6 @@
 import { SignJWT, jwtVerify } from 'jose';
 import { z } from 'zod';
-import { logError, logInfo } from '@karasu-lab/utils/server/log';
+import { log } from '@karasu-lab/utils/server/log';
 
 const ticketPayloadSchema = z.object({ uid: z.string(), path: z.string() });
 
@@ -32,13 +32,13 @@ export async function verifyUploadTicket(request: Request, expectedPath: string,
     const { payload } = await jwtVerify(authHeader.slice(7), ticketSecret(env));
     const ticket = ticketPayloadSchema.parse(payload);
     if (ticket.path !== expectedPath) {
-      logError('verify_upload_ticket', { result: 'path_mismatch', expectedPath, ticketPath: ticket.path });
+      log('verify_upload_ticket', { result: 'path_mismatch', expectedPath, ticketPath: ticket.path }, 'error');
       return null;
     }
-    logInfo('verify_upload_ticket', { result: 'success', uid: ticket.uid, path: ticket.path });
+    log('verify_upload_ticket', { result: 'success', uid: ticket.uid, path: ticket.path });
     return ticket.uid;
   } catch (err) {
-    logError('verify_upload_ticket', { result: 'failure', error: err instanceof Error ? err.message : String(err) });
+    log('verify_upload_ticket', { result: 'failure', error: err instanceof Error ? err.message : String(err) }, 'error');
     return null;
   }
 }
