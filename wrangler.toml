@@ -1,6 +1,7 @@
 name = "cdn-karasu256-com"
 main = "src/index.ts"
 compatibility_date = "2025-06-24"
+compatibility_flags = ["nodejs_compat"]
 
 routes = [{ pattern = "cdn.karasu256.com", custom_domain = true }]
 

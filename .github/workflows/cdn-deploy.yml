@@ -23,7 +23,7 @@ jobs:
         with:
           mode: production
           worker-name: cdn-karasu256-com
-          secret-names: UPLOAD_TICKET_SECRET CRON_JOBS_API_KEY VERCEL_PROTECTION_BYPASS_SECRET
+          secret-names: UPLOAD_TICKET_SECRET CRON_JOBS_API_KEY INTERNAL_API_SECRET VERCEL_PROTECTION_BYPASS_SECRET
           vars-json: ${{ toJSON(vars) }}
           secrets-json: ${{ toJSON(secrets) }}
 
@@ -44,6 +44,6 @@ jobs:
         with:
           mode: preview
           worker-name: cdn-karasu256-com
-          secret-names: UPLOAD_TICKET_SECRET CRON_JOBS_API_KEY VERCEL_PROTECTION_BYPASS_SECRET
+          secret-names: UPLOAD_TICKET_SECRET CRON_JOBS_API_KEY INTERNAL_API_SECRET VERCEL_PROTECTION_BYPASS_SECRET
           vars-json: ${{ toJSON(vars) }}
           secrets-json: ${{ toJSON(secrets) }}
