@@ -25,6 +25,7 @@ declare global {
      * again with `--env preview`).
      */
     CRON_JOBS_API_KEY: string;
+    INTERNAL_API_SECRET: string;
     /**
      * `x-vercel-protection-bypass` value for reaching a Vercel deployment
      * that has Deployment Protection enabled (e.g. a protected Preview) —
