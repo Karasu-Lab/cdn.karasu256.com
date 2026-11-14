@@ -16,6 +16,9 @@ export function isValidUploadPath(path: string, uid: string): boolean {
   const avatarMatch = path.match(/^users\/([^/]+)\/avatar\.png$/);
   if (avatarMatch) return avatarMatch[1] === uid;
 
+  const defaultAvatarMatch = path.match(/^u\/profiles\/([^/]+)\/avatars\/default\/avatar\.png$/);
+  if (defaultAvatarMatch) return defaultAvatarMatch[1] === uid;
+
   const qrMatch = path.match(/^qr\/([^/]+)\/(\d+)\.png$/);
   if (qrMatch) return qrMatch[1] === uid;
 

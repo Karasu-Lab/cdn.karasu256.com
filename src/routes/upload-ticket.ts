@@ -5,6 +5,7 @@ import { isValidUploadPath } from '../lib/uploads';
 
 const uploadTicketBodySchema = t.Object({
   path: t.String(),
+  ttlSeconds: t.Optional(t.Integer({ minimum: 1, maximum: 300 })),
 });
 
 /**
@@ -28,7 +29,7 @@ export const uploadTicketRoute = (env: Env) =>
         return { error: 'Invalid upload path' };
       }
 
-      const ticket = await issueUploadTicket(uid, body.path, env);
+      const ticket = await issueUploadTicket(uid, body.path, env, body.ttlSeconds);
       return { ticket };
     },
     { body: uploadTicketBodySchema }

@@ -4,6 +4,7 @@ import { isAllowedOrigin } from '../lib/cors';
 import { checkGlobalRateLimit } from '../lib/global-rate-limit';
 import { uploadRoute } from './upload';
 import { uploadTicketRoute } from './upload-ticket';
+import { signedUploadRoute } from './signed-upload';
 import { anonymousUploadRoute } from './anonymous-upload';
 import { challengeTokenRoute } from './challenge-token';
 import { deleteRoute } from './delete';
@@ -14,7 +15,7 @@ export const protectedRoutes = (env: Env) =>
       cors({
         origin: isAllowedOrigin,
         credentials: true,
-        methods: ['POST', 'DELETE', 'OPTIONS'],
+        methods: ['POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
       })
     )
@@ -29,6 +30,7 @@ export const protectedRoutes = (env: Env) =>
     })
     .use(uploadRoute(env))
     .use(uploadTicketRoute(env))
+    .use(signedUploadRoute(env))
     .use(anonymousUploadRoute(env))
     .use(challengeTokenRoute(env))
     .use(deleteRoute(env));

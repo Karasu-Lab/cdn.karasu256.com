@@ -27,9 +27,12 @@ export async function issueUploadTicket(uid: string, path: string, env: Env, ttl
 export async function verifyUploadTicket(request: Request, expectedPath: string, env: Env): Promise<string | null> {
   const authHeader = request.headers.get('authorization');
   if (!authHeader?.startsWith('Bearer ')) return null;
+  return verifyTicketToken(authHeader.slice(7), expectedPath, env);
+}
 
+export async function verifyTicketToken(token: string, expectedPath: string, env: Env): Promise<string | null> {
   try {
-    const { payload } = await jwtVerify(authHeader.slice(7), ticketSecret(env));
+    const { payload } = await jwtVerify(token, ticketSecret(env));
     const ticket = ticketPayloadSchema.parse(payload);
     if (ticket.path !== expectedPath) {
       log('verify_upload_ticket', { result: 'path_mismatch', expectedPath, ticketPath: ticket.path }, 'error');
