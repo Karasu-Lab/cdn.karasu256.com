@@ -12,11 +12,11 @@ importers:
         specifier: ^1.4.2
         version: 1.4.2(elysia@1.4.31(@sinclair/typebox@0.34.52)(exact-mirror@0.2.9(@sinclair/typebox@0.34.52))(file-type@22.3.0(supports-color@10.2.2))(openapi-types@12.1.3))
       '@karasu-lab/challengetoken':
-        specifier: 0.1.0-b34518d
-        version: 0.1.0-b34518d
+        specifier: 0.1.0-8cdc9d3
+        version: 0.1.0-8cdc9d3
       '@karasu-lab/utils':
-        specifier: 0.1.0-c59c9ae
-        version: 0.1.0-c59c9ae(@better-auth/core@1.7.17(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@karasu-lab/api-permissions@0.1.0-70bd6e4)(better-call@1.4.5(zod@4.6.7))(nanostores@1.5.5)(next@15.5.29(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        specifier: 0.1.0-11f53a9
+        version: 0.1.0-11f53a9(@better-auth/core@1.7.17(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@karasu-lab/api-permissions@0.1.0-70bd6e4)(better-call@1.4.5(zod@4.6.7))(nanostores@1.5.5)(next@15.5.29(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       elysia:
         specifier: ^1.4.29
         version: 1.4.31(@sinclair/typebox@0.34.52)(exact-mirror@0.2.9(@sinclair/typebox@0.34.52))(file-type@22.3.0(supports-color@10.2.2))(openapi-types@12.1.3)
@@ -584,11 +584,11 @@ packages:
   '@karasu-lab/api-permissions@0.1.0-70bd6e4':
     resolution: {integrity: sha512-mDaW3z6BDyLsAmWcAUDR7vlo/i3O5sXkVx8SKfKBB6DrRACeeE2W8IkT7SlnCqrp/115z4PTOBASgQn6w1ygcQ==, tarball: https://npm.pkg.github.com/download/@karasu-lab/api-permissions/0.1.0-70bd6e4/2bc7b8885e24c1d18df6b3e7764e0d4a86f50fee}
 
-  '@karasu-lab/challengetoken@0.1.0-b34518d':
-    resolution: {integrity: sha512-VOMM7tWrsH/SFoGLu/t/oZ4hUXV9PU7SBF8zUsL2QoX1py6f85bRQBlh7Reztfvrdr0BleFutwuHOZQv2kZGiQ==, tarball: https://npm.pkg.github.com/download/@karasu-lab/challengetoken/0.1.0-b34518d/2de39c52ef5dc52c02916ddd0e00fa0fac9228a4}
+  '@karasu-lab/challengetoken@0.1.0-8cdc9d3':
+    resolution: {integrity: sha512-HVVT4yDiUC68I91ZAFKD4cHdQ0Q62LTlveOoHqf+sTRlAI0va31vLoXhuiIVFWZVnA67iqj7icrjfBqO2MVpyQ==, tarball: https://npm.pkg.github.com/download/@karasu-lab/challengetoken/0.1.0-8cdc9d3/73b433335008285afec5f876650c6b82cdbbe067}
 
-  '@karasu-lab/utils@0.1.0-c59c9ae':
-    resolution: {integrity: sha512-JxgYltUe5QsZfCAqeuFc/saHxjKNwmXfQPPgrI5xjW/rhwCUEL58CtJE9LXi0ZtdpQiX2DRB7jsEqkUW+to87g==, tarball: https://npm.pkg.github.com/download/@karasu-lab/utils/0.1.0-c59c9ae/013c3a5b502f12ab452bc614b5228e950087b3d7}
+  '@karasu-lab/utils@0.1.0-11f53a9':
+    resolution: {integrity: sha512-Zrg4KncbazRJodTDBzfD84zpsF3ATBpzDcaOWr+5URRaFyoXDh6DMUQfN9WdCbpHipr9eBUW5Vwm3f/ZwV94zA==, tarball: https://npm.pkg.github.com/download/@karasu-lab/utils/0.1.0-11f53a9/a3ec8be64b36db78ee53148b02115a13c266cffd}
     peerDependencies:
       '@karasu-lab/api-permissions': 0.1.0-70bd6e4
       next: ^15.3.9
@@ -1535,6 +1535,7 @@ packages:
 
   tldts-core@7.4.20:
     resolution: {integrity: sha512-C630TWXZCZmLq0F2bW4QqwnaaxCQ/svpAqvJwnC4JvgEM5ohhBnGsEzTLSOXcN+xjz+kEaHS5uoWIw2klnqd0A==}
+    deprecated: Partial release, see https://github.com/remusao/tldts/issues/2735. Use >=7.4.22.
 
   tldts@7.4.19:
     resolution: {integrity: sha512-48dH6aSpQnpbzDUc4vIQZ1VjB8tkK+e8c1yx05/SZK+rkssgjEOlxDd/yU8/a4vGYQ9vRgJr9dwMq9TJ0b3X2Q==}
@@ -2042,9 +2043,9 @@ snapshots:
 
   '@karasu-lab/api-permissions@0.1.0-70bd6e4': {}
 
-  '@karasu-lab/challengetoken@0.1.0-b34518d': {}
+  '@karasu-lab/challengetoken@0.1.0-8cdc9d3': {}
 
-  '@karasu-lab/utils@0.1.0-c59c9ae(@better-auth/core@1.7.17(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@karasu-lab/api-permissions@0.1.0-70bd6e4)(better-call@1.4.5(zod@4.6.7))(nanostores@1.5.5)(next@15.5.29(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
+  '@karasu-lab/utils@0.1.0-11f53a9(@better-auth/core@1.7.17(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(@karasu-lab/api-permissions@0.1.0-70bd6e4)(better-call@1.4.5(zod@4.6.7))(nanostores@1.5.5)(next@15.5.29(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
     dependencies:
       '@better-auth/oauth-provider': 1.7.17(@better-auth/core@1.7.17(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-auth@1.7.17(next@15.5.29(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(better-call@1.4.5(zod@4.6.7))
       '@better-auth/passkey': 1.7.12(@better-auth/core@1.7.17(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.15)(kysely@0.29.8)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-auth@1.7.17(next@15.5.29(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(better-call@1.4.5(zod@4.6.7))(nanostores@1.5.5)
