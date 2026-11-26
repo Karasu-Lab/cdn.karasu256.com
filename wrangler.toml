@@ -33,37 +33,21 @@ APP_ENV = "local"
 UPLOAD_TICKET_SECRET = "local-development-upload-ticket-secret"
 CRON_JOBS_API_KEY = "local-development-cron-jobs-api-key"
 
-[env.preview]
-name = "cdn-karasu256-com"
+[env.dev]
+name = "dev-cdn-karasu256-com"
+routes = [{ pattern = "dev-cdn.karasu256.com", custom_domain = true }]
 
-[[env.preview.routes]]
-pattern = "dev-cdn.karasu256.com"
-custom_domain = true
-
-[[env.preview.r2_buckets]]
+[[env.dev.r2_buckets]]
 binding = "CLOUDFLARE_IMAGES"
 bucket_name = "dev-cdn"
-remote = true
 
-[[env.preview.kv_namespaces]]
+[[env.dev.kv_namespaces]]
 binding = "CLOUDFLARE_RATE_LIMIT_KV"
 id = "c3fb9b94d2074304986c58049620d0b4"
-remote = true
 
-[env.preview.vars]
+[env.dev.vars]
 APP_ENV = "preview"
 
 [observability.logs]
 enabled = true
 invocation_logs = false
-
-[previews.vars]
-APP_ENV = "preview"
-
-[[previews.r2_buckets]]
-binding = "CLOUDFLARE_IMAGES"
-bucket_name = "dev-cdn"
-
-[[previews.kv_namespaces]]
-binding = "CLOUDFLARE_RATE_LIMIT_KV"
-id = "c3fb9b94d2074304986c58049620d0b4"
