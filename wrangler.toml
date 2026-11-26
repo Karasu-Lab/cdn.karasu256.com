@@ -37,12 +37,12 @@ CRON_JOBS_API_KEY = "local-development-cron-jobs-api-key"
 name = "cdn-karasu256-com"
 
 [[env.preview.routes]]
-pattern = "dev.cdn.karasu256.com"
+pattern = "dev-cdn.karasu256.com"
 custom_domain = true
 
 [[env.preview.r2_buckets]]
 binding = "CLOUDFLARE_IMAGES"
-bucket_name = "cdn"
+bucket_name = "dev-cdn"
 remote = true
 
 [[env.preview.kv_namespaces]]
@@ -62,7 +62,7 @@ APP_ENV = "preview"
 
 [[previews.r2_buckets]]
 binding = "CLOUDFLARE_IMAGES"
-bucket_name = "cdn"
+bucket_name = "dev-cdn"
 
 [[previews.kv_namespaces]]
 binding = "CLOUDFLARE_RATE_LIMIT_KV"
