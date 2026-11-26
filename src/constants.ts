@@ -14,7 +14,7 @@ const PRODUCTION_DEFAULTS = {
 };
 
 const PREVIEW_DEFAULTS = {
-  CDN_BASE_URL: 'https://dev.cdn.karasu256.com',
+  CDN_BASE_URL: 'https://dev-cdn.karasu256.com',
   AUTH_URL: 'https://dev-api-auth.karasu256.com',
 };
 
